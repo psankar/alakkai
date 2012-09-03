@@ -1,0 +1,66 @@
+input[type="text"] {
+	width:250px;
+}
+
+input[type="password"] {
+	width:300px;
+}
+
+input[type="submit"] {
+	width:150px;
+	height:30px;
+	float:right;
+	background-color:darkblue;
+	color:white;
+	border-radius:20px;
+	border-style:solid;
+}
+
+input[type="checkbox"] {
+	width:15px;
+}
+
+input[type="radio"] {
+	width:15px;
+}
+
+table, td {
+	border: 1px solid #4F8A47;
+}
+
+textarea {
+	height:80px;
+	width:250px;
+}
+
+body {
+	width:50%;
+	margin-left:25%;
+	background:url('bg.png');
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+}
+
+form {
+	background:whiteSmoke;
+	border-style:solid;
+	border-width:1px;
+	border-color:#4F8A47;
+	padding:10px;
+}
+
+label {
+	display:inline-block;
+	width:150px;
+	text-align:right;
+	padding-right:5px;
+}
+
+h1 {
+	color:white;
+	background-color:seaGreen;
+	margin:0;
+	padding-left:5px;
+	font-size:25;
+}

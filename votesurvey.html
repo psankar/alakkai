@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="resources/survey.css" />
+	</head>
+
+	<body >
+		<h1>{{.Title}}</h1>
+
+		<form method=post>
+			{{.Description}}<hr>
+
+			{{range .Questions}}
+			{{.}}</br></br>
+			{{end}}<hr>
+			* indicates mandatory question(s)
+			<input type=submit value='Submit Survey'></br></br>
+		</form>
+		
+		<a href="about">
+			Powered By:</br>
+			<img src="resources/alakkai-logo.png" height="60px" width="151px"/></br>
+		</a>
+
+	</body>
+</html>

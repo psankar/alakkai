@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="resources/survey.css" />
+	</head>
+	<!-- Overriding the CSS setting for this view -->
+	<body style="width:90%;margin-left:5%;background:white">
+		<h1>{{.Title}}</h1>
+		</br>
+		<b>Responses:</b>
+		<table>{{range .Answers}}
+			{{ $elem := . }}
+			<tr>
+				{{ range $elem }}
+				<td>
+					{{.}}
+				</td>
+				{{end}}
+			</tr>
+			{{end}}
+		</table>
+		</br>
+		<a href="about">
+			Powered By:</br>
+			<img src="resources/alakkai-logo.png" height="60px" width="151px"/></br>
+		</a>
+	</body>
+</html>

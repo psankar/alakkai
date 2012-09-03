@@ -1,0 +1,114 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="resources/survey.css" />
+	</head>
+<title>aLakkai</title>
+
+<script>
+
+/*
+ * TODO: Provide support to delete questions and options.
+ * TODO: Provide support to import/edit/export survey templates.
+ * TODO: Add support for more question-types. Refer the todo in the .go file for details.
+ */
+
+var row_count = 0
+var qid_optionscount_hashtable = []
+
+function add_option(qid) {
+	var options_count = qid_optionscount_hashtable[qid]
+	qid_optionscount_hashtable[qid] = ++options_count
+	var ans_type = document.getElementById("anstype" + qid)
+	var options_div = document.getElementById("optionsdiv" + qid)
+	var option = document.createElement("option" + options_count)
+	option.innerHTML = "<input type=" + ans_type.value + " checked disabled><input type=text name=q" + qid + "o" + options_count + "><input type=button value=\"+\" onclick=add_option(" + qid + ")></br>"
+	options_div.appendChild(option)
+}
+
+function ask_options(qid) {
+	var ans_type = document.getElementById("anstype" + qid)
+	if(ans_type.value === "radio" || ans_type.value === "checkbox") {
+		qid_optionscount_hashtable[qid] = 1
+		var options_div = document.getElementById("optionsdiv" + qid)
+		options_div.innerHTML = ""
+		var option = document.createElement("option1")
+		option.innerHTML = "<input type=" + ans_type.value + " checked disabled><input type=text name=q" + qid + "o1><input type=button value=\"+\" onclick=add_option(" + qid + ")></br>"
+		options_div.appendChild(option)
+	} else {
+		var options_div = document.getElementById("optionsdiv" + qid)
+		options_div.innerHTML = ""
+	}
+
+	var mandatory = document.getElementById("mandatory" + qid)
+	if (ans_type.value === "checkbox") {
+		/* Questions with checkbox as the answer type
+		 * cannot be marked mandatory */
+		mandatory.checked = false
+		mandatory.disabled = true
+	} else {
+		mandatory.disabled = false
+	}
+}
+
+function new_question() {
+	row_count ++
+	var question_div = document.createElement("question_div" + row_count)
+	question_div.innerHTML =
+	"<br>" +
+	"Question Text: <input type=text name=question" + row_count + " required='required'><br>" +
+	"Is the question mandatory ? <input type=checkbox name=mandatory" + row_count + " id=mandatory" + row_count + ">Yes<br>" +
+	"Answer Type: <select id=anstype" + row_count + " name=anstype" + row_count + " onchange=ask_options(" + row_count + ")>" +
+	"<option value=text>Text Box " +
+	"<option value=textarea>Multi-line Text Box " +
+	"<option value=radio>Radio Button(s) " +
+	"<option value=checkbox>Check Box(es) " +
+	"</select><br>" +
+	"<div id=optionsdiv" + row_count + "></div>"
+
+	var questions_div = document.getElementById("questions_div")
+	questions_div.appendChild(question_div)
+}
+
+function control_emailresponses_box (cb) {
+	var email_responses = document.getElementById("survey_email_responses")
+	if (cb.checked === true) {
+		email_responses.checked = true
+		email_responses.disabled = true
+	} else {
+		email_responses.disabled = false
+		email_responses.checked = false
+	}
+}
+
+</script>
+
+<body>
+	<form name="survey" method="post">
+		<img src="resources/alakkai-logo.png" height="60px" width="151px"/></br>
+	</br>
+	<div id="creator_details_div">
+		<b><label>Name:</label></b><input type=text class=inputcss name="survey_creator_name" required="required"> *</br>
+		<b><label>Email:</label></b><input type=text class=inputcss name="survey_creator_email" required="required"> *</br></br>
+		<b><label>Survey Title:</label></b><input type=text class=inputcss name="survey_title" required="required"> *</br>
+		<b><label>Survey Description:</label></b><textarea name="survey_description" style="vertical-align:text-top;width:300px;height:100px" required="required"></textarea> *</br>
+	</div>
+	<div id="survey_details_div">
+		<hr>
+		<input type="checkbox" id="survey_email_responses" name="survey_email_responses">email survey responses instantly to me</br>
+		<input type="checkbox" name="survey_donotsave_responses" onchange="control_emailresponses_box(this)">Do not save the survey responses in the server, I will just read them by mail</br>
+		<hr>
+		<b><label>Survey Admin Passphrase:</label></b><input type=password class=inputcss name="survey_admin_password" required="required"> *</br>
+		Hint: Choose a long unique string, like first 4 words of the song you are hearing.</br>
+		Password you type will be mailed in plain text to you.</br>
+	</div>
+	<hr>
+	<div id="questions_div">
+	</div>
+	<hr>
+	<input type=button name=new_question_btn value="New Question" onclick="new_question()"/>
+	<hr>
+	<input type=submit name=create_survey_btn value="Create Survey" /></br>
+	* denotes mandatory fields
+	<hr>
+	</form>
+</body>
