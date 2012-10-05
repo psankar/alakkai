@@ -10,10 +10,10 @@ input[type="submit"] {
 	width:150px;
 	height:30px;
 	float:right;
-	background-color:darkblue;
+	background:darkmagenta;
 	color:white;
-	border-radius:20px;
-	border-style:solid;
+	border-radius:8px;
+	border-width:0;
 }
 
 input[type="checkbox"] {
@@ -36,17 +36,15 @@ textarea {
 body {
 	width:50%;
 	margin-left:25%;
-	background:url('bg.png');
+	background:url('bg.jpg');
 	background-size:100% 100%;
 	background-repeat:no-repeat;
 	background-attachment:fixed;
 }
 
 form {
-	background:whiteSmoke;
-	border-style:solid;
-	border-width:1px;
-	border-color:#4F8A47;
+	background:white;
+	box-shadow:0 0 100px 0px #9F2763;
 	padding:10px;
 }
 
